@@ -23,7 +23,8 @@ const memberObj = {
   isName: "",
   isGender: "",
   isBirth: "",
-  isRegion: ""
+  isRegion1: "",
+  isRegion2: ""
 };
 
 
@@ -297,7 +298,8 @@ function SignUp() {
 
       const { sido, sigugun } = hangjungdong;
       
-      memberObj.isRegion = { value, value2 };
+      memberObj.isRegion1 = value;
+      memberObj.isRegion2 = value2;
 
       return (
         <div>
@@ -340,11 +342,12 @@ function SignUp() {
       console.log(memberObj.isName);
       console.log(memberObj.isGender);
       console.log(memberObj.isBirth);
-      console.log(memberObj.isRegion);
+      console.log(memberObj.isRegion1);
+      console.log(memberObj.isRegion2);
 
       try {
         // 서버에 대한 요청을 비동기로 처리 함
-        const res =  await TeamAPI.memberReg(memberObj.isId, memberObj.isPassword, memberObj.isName, memberObj.isGender, memberObj.isBirth, memberObj.isRegion);
+        const res =  await TeamAPI.memberReg(memberObj.isId, memberObj.isPassword, memberObj.isName, memberObj.isGender, memberObj.isBirth, memberObj.isRegion1,  memberObj.isRegion2);
         setResData(res.data);
 
     } catch (e) {
@@ -355,7 +358,8 @@ function SignUp() {
       console.log(memberObj.isName);
       console.log(memberObj.isGender);
       console.log(memberObj.isBirth);
-      console.log(memberObj.isRegion);
+      console.log(memberObj.isRegion1);
+      console.log(memberObj.isRegion2);
       console.log("가입 완!!");
       // window.location.replace("/Login");
 

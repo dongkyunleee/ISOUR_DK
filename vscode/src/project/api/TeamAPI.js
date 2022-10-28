@@ -21,14 +21,15 @@ const TeamAPI = {
         return await axios.post(TEAM_DOMAIN + "MemberServlet", regCmd, HEADER);
     },
     // 회원 가입
-    memberReg: async function(id, pwd, name, gender, birth, region) {
+    memberReg: async function(id, pwd, name, gender, birth, region1, region2) {
         const memberObj = {
             id: id,
             pwd: pwd,
             name: name,
             gender: gender,
             birth: birth,
-            region: region
+            region1: region1,
+            region2: region2
         };
         return await axios.post(TEAM_DOMAIN + "MemberRegServlet", memberObj, HEADER);
     },
