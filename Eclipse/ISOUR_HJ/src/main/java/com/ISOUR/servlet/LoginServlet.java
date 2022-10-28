@@ -14,6 +14,7 @@ import com.ISOUR.Common.Common;
 import com.ISOUR.DAO.MemberDAO;
 
 
+@SuppressWarnings("serial")
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 

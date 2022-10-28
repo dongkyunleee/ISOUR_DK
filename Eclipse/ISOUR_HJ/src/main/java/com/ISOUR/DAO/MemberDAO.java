@@ -1,7 +1,7 @@
 package com.ISOUR.DAO;
 
 import java.sql.Connection;
-import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -112,11 +112,11 @@ public class MemberDAO {
 		return isNotReg;  // 가입되어 있으면 false, 가입 안되어 있으면 true.
 	}
 	// 회원가입
-	public boolean memberRegister(String id, String pwd, String name, String gender, String birth) {
+	public boolean memberRegister(String id, String pwd, String name, String gender, String birth, String region) {
 		
 		System.out.println("여기까지 오냐..?" + id + "/" + pwd + "/" + name + "/" + gender + "/" + birth);
 		int result = 0;
-		String sql = "INSERT INTO I_MEMBER(ID, PWD, NAME, GENDER, BIRTH, REGION) VALUES(?, ?, ?, ?, ?, '')";
+		String sql = "INSERT INTO I_MEMBER(ID, PWD, NAME, GENDER, BIRTH, REGION) VALUES(?, ?, ?, ?, ?, ?)";
 		try {
 			conn = Common.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -125,7 +125,7 @@ public class MemberDAO {
 			pstmt.setString(3, name);
 			pstmt.setString(4, gender);
 			pstmt.setString(5, birth);
-//			pstmt.setString(6, region);
+			pstmt.setString(6, region);
 			result = pstmt.executeUpdate();	
 			System.out.println("여기까지 와라....2");
 			System.out.println("회원 가입 DB 결과 확인 : " + result);

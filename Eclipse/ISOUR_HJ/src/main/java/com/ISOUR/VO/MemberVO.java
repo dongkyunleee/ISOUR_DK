@@ -1,6 +1,6 @@
 package com.ISOUR.VO;
 
-import java.sql.Date;
+
 
 public class MemberVO {
 	private String id;
