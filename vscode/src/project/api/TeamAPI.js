@@ -30,7 +30,7 @@ const TeamAPI = {
             birth: birth,
             region: region
         };
-        return await axios.post(TEAM_DOMAIN + "memberReg", memberObj, HEADER);
+        return await axios.post(TEAM_DOMAIN + "MemberRegServlet", memberObj, HEADER);
     },
     // 회원 가입 여부 확인
     memberRegCheck: async function(id) {

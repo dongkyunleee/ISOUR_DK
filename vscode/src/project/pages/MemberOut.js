@@ -6,6 +6,7 @@ import imgHome from '../images/home_button.png'
 
 
 const MemberOut = () => {
+
     const [inputId, setInputId] = useState("");
     const [inputPwd, setInputPwd] = useState("");
 
@@ -52,34 +53,34 @@ const MemberOut = () => {
     `;
 
 
-const onClickCheck = async() => {
-    try {
-        const res = await TeamAPI.MemberOut(inputId, inputPwd);
-        console.log("이거 뭐냐고!!! : " + res.data.result);
-       
-        if(res.data.result === "OK") {
-            window.localStorage.setItem("userId", inputId);
-            window.localStorage.setItem("userId", inputPwd);
-            alert('탈퇴 완');
-            // if (onclick) {
-            // window.location.replace("/home");
-            // }
-            console.log("탈퇴 완..");
+    const onClickCheck = async() => {
+        try {
+            const res = await TeamAPI.MemberOut(inputId, inputPwd);
+            console.log("이거 뭐냐고!!! : " + res.data.result);
+        
+            if(res.data.result === "OK") {
+                window.localStorage.setItem("userId", inputId);
+                window.localStorage.setItem("userId", inputPwd);
+                alert('탈퇴 완');
+                // if (onclick) {
+                // window.location.replace("/home");
+                // }
+                console.log("탈퇴 완..");
+            }
+        } catch (e) {
+            console.log("탈퇴 에러..");
+            alert('개미지옥');
         }
-    } catch (e) {
-        console.log("탈퇴 에러..");
-        alert('개미지옥');
     }
-}
 
 
-const onChangId = (e) => {
-    setInputId(e.target.value);
-  }
+    const onChangId = (e) => {
+        setInputId(e.target.value);
+    }
 
-  const onChangePw = (e) => {
-    setInputPwd(e.target.value);
-  }
+    const onChangePw = (e) => {
+        setInputPwd(e.target.value);
+    }
 
 
 
@@ -104,19 +105,22 @@ const onChangId = (e) => {
     // }
 
     return(
-        <MemberListBlock>
-            <MemberList>
-                <MemberTitle>회원 탈퇴 하기</MemberTitle>
-                <div className="item2">
-                <input type="text" placeholder="Enter ID" value={inputId} onChange={onChangId} required />
-                </div>
-                <div className="item2">
-                <input type="password" placeholder="Enter Password" value ={inputPwd} onChange={onChangePw} required />
-                </div>
-                 <button onClick={onClickCheck}>확인</button>
-                 <Link to="/home" className="link-box"><button>취소</button></Link>
-            </MemberList>
-        </MemberListBlock>
+        // <MemberListBlock>
+        //     <MemberList>
+        <div>
+            <MemberTitle>회원 탈퇴 하기</MemberTitle>
+            <div className="item2">
+            <input type="text" placeholder="Enter ID" value={inputId} onChange={onChangId} required />
+            </div>
+            <div className="item2">
+            <input type="password" placeholder="Enter Password" value ={inputPwd} onChange={onChangePw} required />
+            </div>
+                <button onClick={onClickCheck}>확인</button>
+                <Link to="/home" className="link-box"><button>취소</button></Link>
+        </div>
+        //     </MemberList>
+        
+        // </MemberListBlock>
     );
 }
 export default MemberOut;

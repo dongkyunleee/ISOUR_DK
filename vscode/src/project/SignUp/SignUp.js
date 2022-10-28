@@ -26,7 +26,9 @@ const memberObj = {
   isRegion: ""
 };
 
+
 function SignUp() {
+
 
     function InputName() {
       const [name, setName] = useState('');
@@ -260,8 +262,8 @@ function SignUp() {
 
               className="radio2"
               type="radio"
-              value="1"
-              checked={x === "1"}
+              value="남"
+              checked={x === "남"}
               onChange={onChangeRadioButton}
 
             />
@@ -271,8 +273,8 @@ function SignUp() {
             <input
               className="radio3"
               type="radio"
-              value="2"
-              checked={x === "2"}
+              value="여"
+              checked={x === "여"}
               onChange={onChangeRadioButton}
             />
             여자
@@ -283,6 +285,7 @@ function SignUp() {
     const InputAddr = () => {
       const [value, setValue] = useState("");
       const [value2, setValue2] = useState("");
+      
 
       //변수값 변경을 위해 타겟밸류 설정
       const onChangeValue = (e) => {
@@ -322,53 +325,43 @@ function SignUp() {
       );
     }
 
-    const [submit, setSubmit] = useState(false); // 서버로 전송할 수 있는 조건 체크
-    const [resData, setResData] = useState('');
+
+  const [submit, setSubmit] = useState(false); // 서버로 전송할 수 있는 조건 체크
+  const [resData, setResData] = useState('');
 
 
-  //   const isSubmit = () => {
-  //     if(id && pwd && name) setSubmit(true);
-  // }
+  const isSubmit = () => {
+    if(memberObj.isId && memberObj.isPassword && memberObj.isName) setSubmit(true);
+  }
 
-    // const onSubmit = async () => {
-      
-    //   if(memberObj.isName && memberObj.isId && memberObj.isPassword) {
-    //     try {
-    //         // 서버에 대한 요청을 비동기로 처리 함
-    //         const res =  await TeamAPI.memberReg(id, pwd, name, gender, birth, region);
-    //         setResData(res.data);
+    const onClickButton =  async () => {
+      console.log(memberObj.isId);
+      console.log(memberObj.isPassword);
+      console.log(memberObj.isName);
+      console.log(memberObj.isGender);
+      console.log(memberObj.isBirth);
+      console.log(memberObj.isRegion);
 
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-    //   }
-    // }
+      try {
+        // 서버에 대한 요청을 비동기로 처리 함
+        const res =  await TeamAPI.memberReg(memberObj.isId, memberObj.isPassword, memberObj.isName, memberObj.isGender, memberObj.isBirth, memberObj.isRegion);
+        setResData(res.data);
 
-
-    const onClickButton = async() => {
-      if(memberObj.isName && memberObj.isId && memberObj.isPassword) { 
-        setSubmit(true) 
-
-          try {
-            // 서버에 대한 요청을 비동기로 처리 함
-            const res =  await TeamAPI.memberReg(memberObj.isId, memberObj.isPassword, memberObj.isId, memberObj.isGender, memberObj.isBirth, memberObj.isRegion);
-            setResData(res.data);
-
-        } catch (e) {
-            console.log(e);
-        }
-          console.log(memberObj.isId);
-          console.log(memberObj.isPassword);
-          console.log(memberObj.isName);
-          console.log(memberObj.isGender);
-          console.log(memberObj.isBirth);
-          console.log(memberObj.isRegion);
-          console.log("가입 완!!");
-          // window.location.replace("/Login");
-          
-      } else alert('입력된 값을 확인하세요.');
+    } catch (e) {
+        console.log(e);
     }
+      console.log(memberObj.isId);
+      console.log(memberObj.isPassword);
+      console.log(memberObj.isName);
+      console.log(memberObj.isGender);
+      console.log(memberObj.isBirth);
+      console.log(memberObj.isRegion);
+      console.log("가입 완!!");
+      // window.location.replace("/Login");
 
+      
+  // } else alert('입력된 값을 확인하세요.');
+}
 
 
   return (
@@ -381,14 +374,15 @@ function SignUp() {
       <InputAddr></InputAddr>
 
       <br />
-            {submit && <button onClick={onClickButton}>전송</button>}
-            {resData &&  resData.map(list =>(
+            {/* {submit &&  */}
+            <button type="submit" onClick={onClickButton}>회원가입</button>
+            {/* } */}
+            {/* {resData &&  resData.map(list =>(
                 <>
                 <p key={list.index}>이름 : {list.name}</p> 
                 <p key={list.index}>이메일 : {list.email}</p>
                 </>
-            ))}
-      <button type="submit" onClick={onClickButton}>회원가입</button>
+            ))} */}
     </div>
   );
 }

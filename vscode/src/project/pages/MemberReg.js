@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import axios from "axios";
-import KhApi from '../api/khApi'
 import TeamAPI from "../api/TeamAPI";
 
 const memberObj = {
@@ -18,16 +17,28 @@ const MemberReg = () => {
     const [name, setName] = useState('');
     const [gender, setGender] = useState('');
     const [birth, setBirth] = useState('');
-    const [region, setRegionr] = useState('');
+    const [region, setRegion] = useState('');
     const [submit, setSubmit] = useState(false); // 서버로 전송할 수 있는 조건 체크
     const [resData, setResData] = useState(''); // 서버에서 받는 결과 데이터
 
     // 이벤트 체크 함수 만들기
     const onChangeId = (e) => setId(e.target.value); // 현재 이벤트가 발생한 입력창의 값을 useState에 세팅
     const onChangePwd = (e) => setPwd(e.target.value);
-    const onChangeName = (e) => { setName(e.target.value);
-        isSubmit();
-    }
+    const onChangeName = (e) => { setName(e.target.value);};
+    const onChangeBirth = (e) => { setBirth(e.target.value); };
+    const onChangeGender = useCallback(e => {
+        const xCurrent = e.target.value;
+        setGender(xCurrent);
+      });
+
+    //   const onChangeValue = (e) => {
+    //     setValue(e.target.value);
+    //   }
+    //   const onChangeValue2 = (e) => {
+    //     setValue2(e.target.value);
+    //     isSubmit();
+    //   }  
+
 
     // 서버에게 회원 가입 정보를 전송할지에 대한 여부 판단
     const isSubmit = () => {
@@ -57,7 +68,7 @@ const MemberReg = () => {
             <br />
             <input type="text" placeholder='이름 입력' value={name} onChange={onChangeName} />
             <br />
-            {/* <input type="email" placeholder='메일 입력' value={mail} onChange={onChangeMail} /> */}
+            <input type="email" placeholder='메일 입력' value={gender} onChange={onChangeGender} />
             <br />
             {submit && <button onClick={onSubmit}>전송</button>}
             {resData &&  resData.map(list =>(

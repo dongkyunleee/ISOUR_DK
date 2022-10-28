@@ -5,6 +5,7 @@ import Home from './project/HOME/Home';
 import MemberInfo from './project/pages/MemberInfo';
 import Main from './project/pages/Main';
 import MemberOut from './project/pages/MemberOut';
+import MemberReg from './project/pages/MemberReg';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path='/home' element={<Home />} />
         <Route path='/MemberInfo' element={<MemberInfo />} />
         <Route path='/MemberOut' element={<MemberOut />} />
+        <Route path='/MemberOut' element={<MemberReg />} />
       </Routes>
     </Router>
   );
