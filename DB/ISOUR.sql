@@ -1,0 +1,21 @@
+CREATE TABLE I_MEMBER (
+    ID      VARCHAR2(30) PRIMARY KEY,
+    PWD     VARCHAR2(20),
+    NAME    VARCHAR2(50),
+    EMAIL   VARCHAR2(50),
+    JOIN    DATE DEFAULT SYSDATE
+);
+
+INSERT INTO I_MEMBER VALUES('LEEMH', 'SPHB8250', 'ÀÌ¹ÎÇü', 'LEEMH@gmail.com', sysdate);
+INSERT INTO I_MEMBER VALUES('JEONKH', '1234567', 'Àü±ÔÇÑ', 'JEONKH@gmail.com', sysdate);
+INSERT INTO I_MEMBER VALUES('JOHK', '1234567', 'Á¶Çý°æ', 'JOHK@gmail.com', sysdate);
+INSERT INTO I_MEMBER VALUES('WOOHJ', '1234567', '¿ìÇýÁ¤', 'WOOHJ@gmail.com', sysdate);
+INSERT INTO I_MEMBER VALUES('LEEDK', '12345612', 'ÀÌµ¿±Õ', 'LEEDK@gmail.com', sysdate);
+INSERT INTO I_MEMBER VALUES('ADMIN', 'ADMIN1234', '°ü¸®ÀÚ', 'ISOUR@gmail.com', '22/07/19');
+
+SELECT *
+FROM I_MEMBER;
+
+COMMIT;
+
+SELECT * FROM I_MEMBER WHERE ID = 'ADMIN';
