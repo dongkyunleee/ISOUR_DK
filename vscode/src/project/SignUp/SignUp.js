@@ -232,8 +232,11 @@ function SignUp() {
       const [birth, setBirth] = useState('');
 
       const onChangeBirth = e => { setBirth(e.target.value); };
-
+      
       memberObj.isBirth = birth;
+
+      
+
       
       return(
         <div className='field-wrap'>
@@ -245,6 +248,8 @@ function SignUp() {
         </div>
       );
     }
+
+
 
     function InputGender() {
       const [x, setX] = useState([]);
@@ -286,14 +291,19 @@ function SignUp() {
     const InputAddr = () => {
       const [value, setValue] = useState("");
       const [value2, setValue2] = useState("");
-      
+    
 
       //변수값 변경을 위해 타겟밸류 설정
       const onChangeValue = (e) => {
         setValue(e.target.value);
+        console.log(e.target.value);
       }
+
+
       const onChangeValue2 = (e) => {
         setValue2(e.target.value);
+        console.log(e.target.value);
+        isSubmit();
       }
 
       const { sido, sigugun } = hangjungdong;
@@ -337,14 +347,6 @@ function SignUp() {
   }
 
     const onClickButton =  async () => {
-      console.log(memberObj.isId);
-      console.log(memberObj.isPassword);
-      console.log(memberObj.isName);
-      console.log(memberObj.isGender);
-      console.log(memberObj.isBirth);
-      console.log(memberObj.isRegion1);
-      console.log(memberObj.isRegion2);
-
       try {
         // 서버에 대한 요청을 비동기로 처리 함
         const res =  await TeamAPI.memberReg(memberObj.isId, memberObj.isPassword, memberObj.isName, memberObj.isGender, memberObj.isBirth, memberObj.isRegion1,  memberObj.isRegion2);
@@ -365,7 +367,7 @@ function SignUp() {
 
       
   // } else alert('입력된 값을 확인하세요.');
-}
+  }
 
 
   return (
