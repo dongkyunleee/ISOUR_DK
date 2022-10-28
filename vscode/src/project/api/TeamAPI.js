@@ -21,12 +21,14 @@ const TeamAPI = {
         return await axios.post(TEAM_DOMAIN + "MemberServlet", regCmd, HEADER);
     },
     // 회원 가입
-    memberReg: async function(id, pwd, name, mail) {
+    memberReg: async function(id, pwd, name, gender, birth, region) {
         const memberObj = {
             id: id,
             pwd: pwd,
             name: name,
-            mail: mail
+            gender: gender,
+            birth: birth,
+            region: region
         };
         return await axios.post(TEAM_DOMAIN + "memberReg", memberObj, HEADER);
     },
@@ -36,6 +38,17 @@ const TeamAPI = {
             id: id,
         }
         return await axios.post(TEAM_DOMAIN + "MemberCheck", regCheck, HEADER);
+    },
+
+        // 회원 탈퇴
+        MemberOut: async function(id, pwd) {
+        const regCmd = {
+            id: id,
+            pwd: pwd
+            // name: name,
+            // mail: mail
+        }
+        return await axios.post(TEAM_DOMAIN + "MemberOut", regCmd, HEADER);
     }
 }
 

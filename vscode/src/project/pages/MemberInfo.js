@@ -69,11 +69,11 @@ const MemberInfo = () => {
             <MemberList>
                 <MemberTitle>회원 정보</MemberTitle>
                 <tr>
-                    <th>아이디</th><th>이름</th><th>이메일</th><th>가입일</th>
+                    <th>아이디</th><th>이름</th><th>성별</th><th>생일</th><th>주소</th>
                 </tr>
                 {memberInfo && memberInfo.map(member => (
                     <tr key={member.id}>
-                        <td>{member.id}</td><td>{member.name}</td><td>{member.email}</td><td>{member.join}</td>
+                        <td>{member.id}</td><td>{member.name}</td><td>{member.gender}</td><td>{member.birth}</td><td>{member.region}</td>
                     </tr>
                 ))}
             </MemberList>

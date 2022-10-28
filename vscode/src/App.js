@@ -4,6 +4,7 @@ import SignUp from './project/SignUp/SignUp';
 import Home from './project/HOME/Home';
 import MemberInfo from './project/pages/MemberInfo';
 import Main from './project/pages/Main';
+import MemberOut from './project/pages/MemberOut';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/home' element={<Home />} />
         <Route path='/MemberInfo' element={<MemberInfo />} />
+        <Route path='/MemberOut' element={<MemberOut />} />
       </Routes>
     </Router>
   );

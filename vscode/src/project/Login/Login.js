@@ -40,7 +40,8 @@ function Login() {
     }        
   }
 
-  const onClickLogin = async() => {
+  const onClickLogin = async(e) => {
+    e.preventDefault();
     console.log("로그인버튼 눌렀음");
 
     try {
@@ -79,7 +80,7 @@ function Login() {
 
             <div className="Form-item">
               <span className="Form-item-icon material-symbols-rounded">mail</span>
-              <input type="text" placeholder="Enter Email" value={inputId} onChange={onChangId} required />
+              <input type="text" placeholder="Enter ID" value={inputId} onChange={onChangId} required />
             </div>
             <div className="hint">
               {inputId.length > 0 && <span className={`message ${isId ? 'success' : 'error'}`}>{idMessage}</span>}
