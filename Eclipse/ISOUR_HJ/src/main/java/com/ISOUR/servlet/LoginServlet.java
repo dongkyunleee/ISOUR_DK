@@ -14,13 +14,10 @@ import com.ISOUR.Common.Common;
 import com.ISOUR.DAO.MemberDAO;
 
 
-
-@SuppressWarnings("serial")
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 	
@@ -43,14 +40,17 @@ public class LoginServlet extends HttpServlet {
 		
 		String getId = (String)jsonObj.get("id");
 		String getPwd = (String)jsonObj.get("pwd");
-
+		
+		System.out.println("log-아이디 받았다 : " + getId);
+		
 		
 		MemberDAO dao = new MemberDAO();
 		boolean isRegister = dao.logingCheck(getId, getPwd);
 		
+		System.out.println("여기여기여기여기 : " + isRegister);
+		
 		PrintWriter out = response.getWriter();
 		JSONObject resJson = new JSONObject();
-		System.out.println("여기까지 와라....Login" + isRegister);
 		if(isRegister) resJson.put("result", "OK");  // result = Key / OK = value
 		else resJson.put("result", "NOK");
 		out.print(resJson);
@@ -58,7 +58,3 @@ public class LoginServlet extends HttpServlet {
 	}
  
 }
-
-
-
-//  http://localhost:8090/kh_mini_ex/

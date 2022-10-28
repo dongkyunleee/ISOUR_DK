@@ -18,7 +18,6 @@ import com.ISOUR.DAO.MemberDAO;
 import com.ISOUR.VO.MemberVO;
 
 
-
 @SuppressWarnings("serial")
 @WebServlet("/MemberServlet")
 public class MemberServlet extends HttpServlet {
@@ -48,7 +47,7 @@ public class MemberServlet extends HttpServlet {
 		
 		if(!reqCmd.equals("MemberInfo")) {
 			JSONObject resJson = new JSONObject();
-			resJson.put("result", "NOT OK");
+			resJson.put("result", "멤버서블렛 NOT OK");
 			out.print(resJson);
 			return;
 		}
@@ -63,10 +62,11 @@ public class MemberServlet extends HttpServlet {
 			memberInfo.put("id", e.getId());
 			memberInfo.put("pwd", e.getPwd());
 			memberInfo.put("name", e.getName());
-			memberInfo.put("email", e.getEmail());
-			DateFormat dateFormat = new SimpleDateFormat("YYYY/MM/dd HH:mm:ss");
-			String dateToStr = dateFormat.format(e.getJoin());   // 시간을 문자열로 형변환
-			memberInfo.put("join",  dateToStr);
+			memberInfo.put("gender", e.getGender());
+//			DateFormat dateFormat = new SimpleDateFormat("YYYY/MM/dd");
+//			String dateToStr = dateFormat.format(e.getBirth());   // 시간을 문자열로 형변환
+			memberInfo.put("birth",  e.getBirth());
+			memberInfo.put("region",  e.getRegion());
 			memberArray.add(memberInfo);
 		}
 		System.out.println(memberArray);

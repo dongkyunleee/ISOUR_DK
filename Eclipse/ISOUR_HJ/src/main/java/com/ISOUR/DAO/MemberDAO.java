@@ -12,8 +12,6 @@ import com.ISOUR.Common.Common;
 import com.ISOUR.VO.MemberVO;
 
 
-
-
 public class MemberDAO {
 	private Connection conn = null;
 	private Statement stmt = null; //표준 SQL문을 수행하기 위한 Statement 객체 얻기
@@ -22,18 +20,22 @@ public class MemberDAO {
 	private PreparedStatement pstmt = null; 
 	
 	public boolean logingCheck(String id, String pwd) {
-//		System.out.println("왜그래??? : " + id + pwd);
+		
+		
 		try {
+
 			conn = Common.getConnection();
 			stmt = conn.createStatement(); // Statement 객체 얻기
 			String sql = "SELECT * FROM I_MEMBER WHERE ID = " + "'" + id + "'";
 			rs = stmt.executeQuery(sql);
-			
+
 			while(rs.next()) { // 읽은 데이타가 있으면 true
-				String sqlId = rs.getString("ID"); // 쿼리문 수행 결과에서 ID값을 가져 옴
-				String sqlPwd = rs.getString("PWD");
+				String sqlId = rs.getString("id"); // 쿼리문 수행 결과에서 ID값을 가져 옴
+				String sqlPwd = rs.getString("pwd");
+				
 				System.out.println("ID : " + sqlId);
 				System.out.println("PWD : " + sqlPwd);
+				
 				if(id.equals(sqlId) && pwd.equals(sqlPwd)) {
 					Common.close(rs);
 					Common.close(stmt);
@@ -62,55 +64,68 @@ public class MemberDAO {
 				String id = rs.getString("ID");
 				String pwd = rs.getString("PWD");
 				String name = rs.getString("NAME");
-				String email = rs.getString("EMAIL");
-				Date join = rs.getDate("JOIN");
+				String gender = rs.getString("GENDER");
+				String birth = rs.getString("BIRTH");
+				String region = rs.getString("REGION");
 				
-				MemberVO vo = new MemberVO();
+				MemberVO vo = new MemberVO();  // 각 정보를 저장할 수 있는 객체 생성.
 				vo.setId(id);
 				vo.setPwd(pwd);
 				vo.setName(name);
-				vo.setEmail(email);
-				vo.setJoin(join);
-				list.add(vo);
+				vo.setGender(gender);
+				vo.setBirth(birth);
+				vo.setRegion(region);
+				
+				list.add(vo);  // 받은 정보를 list로 저장. 
 			}
 			Common.close(rs);
 			Common.close(stmt);
 			Common.close(conn);
-		} catch (Exception e) {
-			e.printStackTrace();
+								
+		} catch(Exception e) {
+			e.printStackTrace();	// 어디서 오류가 발생했는지 뿌려줌. 
 		}
-		
 		return list;
 	}
 	
+	// 회원가입여부 확인!!
 	public boolean regIdCheck(String id) {
+
 		boolean isNotReg = false;
 		try {
 			conn = Common.getConnection();
 			stmt = conn.createStatement();
-			String sql = "SELECT * FROM I_MEMBER WHERE ID = " + "'" + id +"'";
+			String sql = "SELECT * FROM I_MEMBER WHERE ID = " + "'" + id + "'";
 			rs = stmt.executeQuery(sql);
-			if(rs.next()) isNotReg = false;
-			else isNotReg = true;
-		} catch(Exception e) {
+
+			if(rs.next()) {
+				isNotReg = false;
+			} else {
+				isNotReg =  true;
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 		Common.close(rs);
 		Common.close(stmt);
 		Common.close(conn);
-		return isNotReg; // 가입 되어 있으면 false, 가입이 안되어 있으면 true
+		return isNotReg;  // 가입되어 있으면 false, 가입 안되어 있으면 true.
 	}
-
-	public boolean memberRegister(String id, String pwd, String name, String mail) {
+	// 회원가입
+	public boolean memberRegister(String id, String pwd, String name, String gender, String birth) {
+		
+		System.out.println("여기까지 오냐..?" + id + "/" + pwd + "/" + name + "/" + gender + "/" + birth);
 		int result = 0;
-		String sql = "INSERT INTO I_MEMBER(ID, PWD, NAME, EMAIL, JOIN) VALUES(?, ?, ?, ?, SYSDATE)";
+		String sql = "INSERT INTO I_MEMBER(ID, PWD, NAME, GENDER, BIRTH, REGION) VALUES(?, ?, ?, ?, ?, '')";
 		try {
 			conn = Common.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
 			pstmt.setString(3, name);
-			pstmt.setString(4, mail);
+			pstmt.setString(4, gender);
+			pstmt.setString(5, birth);
+//			pstmt.setString(6, region);
 			result = pstmt.executeUpdate();	
 			System.out.println("여기까지 와라....2");
 			System.out.println("회원 가입 DB 결과 확인 : " + result);
@@ -126,20 +141,21 @@ public class MemberDAO {
 		else return false;
 	}
 	
+	
+	// 회원탈퇴
 	public boolean MemOutCheck(String id) {
 		int isOut = 0;
 		String sql = "DELETE FROM I_MEMBER WHERE ID = " + "'" + id +"'";
-//		String GoCommit = "commit";
+		
 		
 		System.out.println("rs뭐냐 ID : " + id);
 		
 		try {
 			conn = Common.getConnection();
 			pstmt = conn.prepareStatement(sql);
-//			pstmt = conn.prepareStatement(GoCommit);
 			isOut = pstmt.executeUpdate();
 			
-			System.out.println("rs뭐냐" + rs);
+			System.out.println("rs뭐냐" + isOut);
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -151,4 +167,23 @@ public class MemberDAO {
 		if(isOut == 1) return true;
 		else return false;
 	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

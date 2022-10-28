@@ -6,8 +6,10 @@ public class MemberVO {
 	private String id;
 	private String pwd;
 	private String name;
-	private String email;
-	private Date join;
+	private String gender;
+	private String birth;
+	private String region;
+	
 	
 	public String getId() {
 		return id;
@@ -27,17 +29,27 @@ public class MemberVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getEmail() {
-		return email;
+	public String getGender() {
+		return gender;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
-	public Date getJoin() {
-		return join;
+	public String getBirth() {
+		return birth;
 	}
-	public void setJoin(Date join) {
-		this.join = join;
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+	public String getRegion() {
+		return region;
+	}
+	public void setRegion(String region) {
+		this.region = region;
 	}
 
 }
+	
+	
+	
+	
