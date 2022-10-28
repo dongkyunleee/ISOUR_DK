@@ -43,12 +43,13 @@ public class MemberRegServlet extends HttpServlet {
 		String getName = (String)jsonObj.get("name");
 		String getGender = (String)jsonObj.get("gender");
 		String getBirth = (String)jsonObj.get("birth");
-		String getRegion = (String)jsonObj.get("region");
+		String getRegion1 = (String)jsonObj.get("region1");
+		String getRegion2 = (String)jsonObj.get("region2");
 		
-		System.out.println("여기까지 와라....Reg" + getId+ getPwd+ getName+ getGender+ getBirth);
+		System.out.println("여기까지 와라....Reg" + getId+ getPwd+ getName+ getGender+ getBirth+ getRegion1 + getRegion2);
 		
 		MemberDAO dao = new MemberDAO();
-		boolean rstComplete = dao.memberRegister(getId, getPwd, getName, getGender, getBirth, getRegion);
+		boolean rstComplete = dao.memberRegister(getId, getPwd, getName, getGender, getBirth, getRegion1, getRegion2);
 		
 		PrintWriter out = response.getWriter();
 		JSONObject resJson = new JSONObject();

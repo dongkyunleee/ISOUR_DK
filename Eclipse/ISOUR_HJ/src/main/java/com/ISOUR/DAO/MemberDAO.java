@@ -62,19 +62,19 @@ public class MemberDAO {
 			
 			while(rs.next()) {
 				String id = rs.getString("ID");
-				String pwd = rs.getString("PWD");
 				String name = rs.getString("NAME");
 				String gender = rs.getString("GENDER");
 				String birth = rs.getString("BIRTH");
-				String region = rs.getString("REGION");
+				String region1 = rs.getString("REGION1");
+				String region2 = rs.getString("REGION2");
 				
 				MemberVO vo = new MemberVO();  // 각 정보를 저장할 수 있는 객체 생성.
 				vo.setId(id);
-				vo.setPwd(pwd);
 				vo.setName(name);
 				vo.setGender(gender);
 				vo.setBirth(birth);
-				vo.setRegion(region);
+				vo.setRegion1(region1);
+				vo.setRegion2(region2);
 				
 				list.add(vo);  // 받은 정보를 list로 저장. 
 			}
@@ -112,11 +112,11 @@ public class MemberDAO {
 		return isNotReg;  // 가입되어 있으면 false, 가입 안되어 있으면 true.
 	}
 	// 회원가입
-	public boolean memberRegister(String id, String pwd, String name, String gender, String birth, String region) {
+	public boolean memberRegister(String id, String pwd, String name, String gender, String birth, String region1, String region2) {
 		
-		System.out.println("여기까지 오냐..?" + id + "/" + pwd + "/" + name + "/" + gender + "/" + birth);
+		System.out.println("여기까지 오냐..?" + id + "/" + pwd + "/" + name + "/" + gender + "/" + birth + "/" + region1 + "/" + region2);
 		int result = 0;
-		String sql = "INSERT INTO I_MEMBER(ID, PWD, NAME, GENDER, BIRTH, REGION) VALUES(?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO I_MEMBER(ID, PWD, NAME, GENDER, BIRTH, REGION1, REGION2) VALUES(?, ?, ?, ?, ?, ?, ?)";
 		try {
 			conn = Common.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -125,7 +125,8 @@ public class MemberDAO {
 			pstmt.setString(3, name);
 			pstmt.setString(4, gender);
 			pstmt.setString(5, birth);
-			pstmt.setString(6, region);
+			pstmt.setString(6, region1);
+			pstmt.setString(7, region2);
 			result = pstmt.executeUpdate();	
 			System.out.println("여기까지 와라....2");
 			System.out.println("회원 가입 DB 결과 확인 : " + result);

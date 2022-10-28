@@ -58,13 +58,13 @@ public class MemberServlet extends HttpServlet {
 		for(MemberVO e : list) {
 			JSONObject memberInfo = new JSONObject();
 			memberInfo.put("id", e.getId());
-			memberInfo.put("pwd", e.getPwd());
 			memberInfo.put("name", e.getName());
 			memberInfo.put("gender", e.getGender());
 //			DateFormat dateFormat = new SimpleDateFormat("YYYY/MM/dd");
 //			String dateToStr = dateFormat.format(e.getBirth());   // 시간을 문자열로 형변환
 			memberInfo.put("birth",  e.getBirth());
-			memberInfo.put("region",  e.getRegion());
+			memberInfo.put("region1",  e.getRegion1());
+			memberInfo.put("region2",  e.getRegion2());
 			memberArray.add(memberInfo);
 		}
 		System.out.println(memberArray);
