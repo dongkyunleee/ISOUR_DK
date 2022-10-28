@@ -15,6 +15,8 @@ import com.ISOUR.Common.Common;
 import com.ISOUR.DAO.MemberDAO;
 
 
+
+
 @WebServlet("/MemberRegServlet")
 public class MemberRegServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -33,17 +35,26 @@ public class MemberRegServlet extends HttpServlet {
 		Common.corsResSet(response);
 		StringBuffer sb = Common.reqStringBuff(request);
 		JSONObject jsonObj = Common.getJsonObj(sb);
+		
+		System.out.println("HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				
 		String getId = (String)jsonObj.get("id");
 		String getPwd = (String)jsonObj.get("pwd");
 		String getName = (String)jsonObj.get("name");
-		String getMail = (String)jsonObj.get("mail");
+		String getGender = (String)jsonObj.get("gender");
+		String getBirth = (String)jsonObj.get("birth");
+//		String getRegion = (String)jsonObj.get("region");
+		
+		System.out.println("여기까지 와라....Reg" + getId+ getPwd+ getName+ getGender+ getBirth);
 		
 		MemberDAO dao = new MemberDAO();
-		boolean rstComplete = dao.memberRegister(getId, getPwd, getName, getMail);
+		boolean rstComplete = dao.memberRegister(getId, getPwd, getName, getGender, getBirth);
 		
 		PrintWriter out = response.getWriter();
 		JSONObject resJson = new JSONObject();
-		System.out.println("여기까지 와라....Reg");
+		
+		System.out.println("여기까지 와라....Reg" + rstComplete);
+		
 		if(rstComplete) resJson.put("result", "OK");
 		else resJson.put("result", "NOK");
 		out.print(resJson);

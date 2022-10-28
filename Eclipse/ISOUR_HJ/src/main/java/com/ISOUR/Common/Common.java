@@ -3,7 +3,6 @@ package com.ISOUR.Common;
 import java.io.BufferedReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -14,7 +13,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-@SuppressWarnings("unused")
 public class Common {
 	// 오라클 설정 정보 (JDBC 연결)
 	final static String ORACLE_URL = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -55,8 +53,6 @@ public class Common {
 			e.printStackTrace();
 		}
 	}
-
-	
 	public static void close(ResultSet rset) {
 		try {
 			if(rset != null && !rset.isClosed()) {
